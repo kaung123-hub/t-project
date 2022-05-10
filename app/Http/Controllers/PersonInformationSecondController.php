@@ -17,8 +17,8 @@ class PersonInformationSecondController extends Controller
         return view('offline-person-information',compact('result'));
     }
     function difflist(){
-        $query = DB::table('offline_data.person_information_seconds as dt1')->join('online_data.person_information as dt2', 'dt1.person_code', '=', 'dt2.person_code','left outer')->select('dt1.*')->whereNull('dt2.ID');        
-        $output = DB::table('online_data.person_information as dt1')->join('offline_data.person_information_seconds as dt2', 'dt1.person_code', '=', 'dt2.person_code','left outer')->select('dt1.*')->whereNull('dt2.ID')->unionAll($query)->get();
+        $query = DB::table('offline_data.person_information_seconds as dt1')->join('online_data.person_information as dt2', 'dt1.nrc', '=', 'dt2.nrc','left outer')->select('dt1.*')->whereNull('dt2.ID');        
+        $output = DB::table('online_data.person_information as dt1')->join('offline_data.person_information_seconds as dt2', 'dt1.nrc', '=', 'dt2.nrc','left outer')->select('dt1.*')->whereNull('dt2.ID')->unionAll($query)->get();
         return view('difflist',compact('output'));
         // return PersonInformation::all();
         // return DB::connection('mysql2')->table('person_information')->get();
